@@ -8,7 +8,7 @@ const FilterOptions = ({ filters, setFilters }) => {
   };
 
   return (
-    <div className="flex space-x-4">
+    <div className="flex flex-wrap gap-4">
       {Object.entries(filters).map(([key, value]) => (
         <div key={key} className="flex items-center space-x-2">
           <Checkbox
@@ -16,7 +16,9 @@ const FilterOptions = ({ filters, setFilters }) => {
             checked={value}
             onCheckedChange={() => handleFilterChange(key)}
           />
-          <Label htmlFor={key} className="capitalize">{key}</Label>
+          <Label htmlFor={key} className="capitalize text-sm font-medium cursor-pointer">
+            {key}
+          </Label>
         </div>
       ))}
     </div>

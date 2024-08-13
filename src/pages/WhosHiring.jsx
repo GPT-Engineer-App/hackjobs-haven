@@ -4,6 +4,7 @@ import JobList from '../components/JobList';
 import SearchBar from '../components/SearchBar';
 import FilterOptions from '../components/FilterOptions';
 import { fetchWhosHiringPosts } from '../utils/api';
+import { Loader2 } from 'lucide-react';
 
 const WhosHiring = () => {
   const { data: jobs, isLoading, error } = useQuery({
@@ -30,12 +31,16 @@ const WhosHiring = () => {
     });
   }, [jobs, searchTerm, filters]);
 
-  if (isLoading) return <div className="flex justify-center items-center h-screen">Loading...</div>;
-  if (error) return <div className="text-red-500">Error: {error.message}</div>;
+  if (isLoading) return (
+    <div className="flex justify-center items-center h-screen">
+      <Loader2 className="h-8 w-8 animate-spin" />
+    </div>
+  );
+  if (error) return <div className="text-red-500 text-center mt-8">Error: {error.message}</div>;
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Hacker News: Who's Hiring</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center">Hacker News: Who's Hiring</h1>
       <div className="mb-6">
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       </div>

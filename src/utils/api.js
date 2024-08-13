@@ -11,5 +11,6 @@ export const fetchWhosHiringPosts = async () => {
     return job;
   });
 
-  return Promise.all(jobPromises);
+  const jobs = await Promise.all(jobPromises);
+  return jobs.filter(job => job.text && !job.deleted && !job.dead);
 };
