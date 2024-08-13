@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from './ui/card';
-import { Badge } from './ui/badge';
 
 const JobList = ({ jobs }) => {
   return (
@@ -8,15 +7,10 @@ const JobList = ({ jobs }) => {
       {jobs.map((job) => (
         <Card key={job.id} className="hover:shadow-md transition-shadow">
           <CardHeader>
-            <CardTitle className="text-lg font-semibold">{extractTitle(job.text) || 'Job Posting'}</CardTitle>
+            <CardTitle className="text-xl font-semibold">{extractTitle(job.text) || 'Job Posting'}</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="mb-2 flex flex-wrap gap-2">
-              {extractKeywords(job.text).map((keyword, index) => (
-                <Badge key={index} variant="secondary">{keyword}</Badge>
-              ))}
-            </div>
-            <p className="whitespace-pre-wrap text-sm text-gray-600">{job.text}</p>
+            <p className="whitespace-pre-wrap text-base text-gray-600">{decodeHtmlEntities(job.text)}</p>
           </CardContent>
         </Card>
       ))}
@@ -29,9 +23,10 @@ const extractTitle = (text) => {
   return firstLine.length > 100 ? firstLine.substring(0, 100) + '...' : firstLine;
 };
 
-const extractKeywords = (text) => {
-  const keywords = ['remote', 'onsite', 'intern', 'senior', 'junior', 'full-time', 'part-time'];
-  return keywords.filter(keyword => text.toLowerCase().includes(keyword));
+const decodeHtmlEntities = (text) => {
+  const textArea = document.createElement('textarea');
+  textArea.innerHTML = text;
+  return textArea.value;
 };
 
 export default JobList;

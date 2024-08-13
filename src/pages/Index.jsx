@@ -39,8 +39,8 @@ const Index = () => {
   if (error) return <div className="text-red-500 text-center mt-8">Error: {error.message}</div>;
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6 text-center">Hacker News: Who's Hiring</h1>
+    <div className="container mx-auto px-4 py-8 max-w-3xl">
+      <h1 className="text-4xl font-bold mb-6 text-center">Hacker News: Who's Hiring</h1>
       <div className="mb-6">
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       </div>
